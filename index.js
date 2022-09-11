@@ -14,10 +14,11 @@ class Node {
         var position = add([this.position.x, this.position.y], rotate([this.radius, 0], this.angle + add_angle));
         return {x: position[0], y: position[1]};
     }
-}
+  }
 
 // var nodes = [];
 
+// isso mudou, tenho que atualizar, pois aumentei o tamanho do canvas
 // localização x: 20 a 380, o 200 é o meio
 // localização y: 20 a 380, o 200 é o meio
 
@@ -25,7 +26,6 @@ window.onload = function(){
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
     console.log(context);
-
     setInterval(() => {
         for (node of nodes) {
             context.beginPath();
@@ -41,23 +41,23 @@ window.onload = function(){
 var nodes = [];
 var x = prompt("Type numbers of nodes");
 function numberOfNodes() {
-        class Node {
-            constructor(label, pos, dir) {
-                this.pos = pos;
-                this.dir = dir;
-                this.label = label;
-                this.ports = [null, null, null]; // [[node0, 0], [node1, 1], [node2, 2]]
-            }
-        }
-        for (var i = 0; i < x; i++) {
-            var tipo    = prompt("Type 0 to default")
-            var local_x = prompt("Type location x")
-            var local_y = prompt("Type location y")
-            this["node" +i] = new Node(tipo, {x: local_x, y: local_y}, {x: 0, y:1})
-            nodes.push(this["node"+i])
-            console.log(nodes)
+    class Node {
+        constructor(label, pos, dir) {
+            this.pos = pos;
+            this.dir = dir;
+            this.label = label;
+            this.ports = [null, null, null]; // [[node0, 0], [node1, 1], [node2, 2]]
         }
     }
+    for (var i = 0; i < x; i++) {
+        var tipo    = prompt("Type 0 to default")
+        var local_x = prompt("Type location x")
+        var local_y = prompt("Type location y")
+        this["node" +i] = new Node(tipo, {x: local_x, y: local_y}, {x: 0, y:1})
+        nodes.push(this["node"+i])
+        console.log(nodes)
+    }
+}
 
 document.getElementById("demo").innerHTML = numberOfNodes();
 
@@ -68,7 +68,6 @@ document.getElementById("demo").innerHTML = numberOfNodes();
         var positionClicked = [e.offsetX, e.offsetY];
         var maxRadiusDistance = 10;
         elementClicked = null;
-
         for (var i = 0; i < nodes.length; i++) {
             // Checks if any node was clicked
             var distanceFromNode = getDistanceBetween([nodes[i].position.x, nodes[i].position.y], positionClicked);
@@ -81,7 +80,6 @@ document.getElementById("demo").innerHTML = numberOfNodes();
                 }
             }
         }
-
     }
 
     // -- Drag and drop actions --
@@ -91,7 +89,6 @@ document.getElementById("demo").innerHTML = numberOfNodes();
 
         elementSelected = null;
         elementClicked = null;
-
         // Check if the initial node was clicked
         var distanceFromInitialNode = getDistanceBetween([nodes[0].position.x, nodes[0].position.y], positionClicked);
 
@@ -111,7 +108,6 @@ document.getElementById("demo").innerHTML = numberOfNodes();
                 }
             }
         }
-
     };
 
     canvas.onmousemove = function(e) {
@@ -128,18 +124,15 @@ document.getElementById("demo").innerHTML = numberOfNodes();
             }
         }
     }
-
     canvas.onmouseup = function(e) {
         elementSelected = null;
     }
-
 
 function setupKeyframeForAnimation() {
     var animKeyframe = (currentKeyframe + ((Date.now() - animate) / 1000)) % keyframes.length;
     var nodesA = keyframes[Math.floor(animKeyframe)];
     var nodesB = keyframes[Math.floor(animKeyframe + 1) % keyframes.length];
     var animNodes = copyNodes(nodesA);
-
     // There was no reduction or duplication
     if (nodesA.length === nodesB.length) {
         // updates position, angle and pivots of a node
@@ -151,7 +144,6 @@ function setupKeyframeForAnimation() {
             var ba = nodesB[i].angle;
             animNodes[i].position = {x: ax+(bx-ax)*t, y: ay+(by-ay)*t};
             animNodes[i].angle = aa + (ba - aa) * t;
-
             for (var j = 0; j < 3; j++) {
                 var {x: pax, y: pay} = nodesA[i].pivots[j];
                 var {x: pbx, y: pby} = nodesB[i].pivots[j];
@@ -160,7 +152,7 @@ function setupKeyframeForAnimation() {
         }
     }
     return animNodes;
-}
+  }
 
 
 // --- Keyboard actions ---
