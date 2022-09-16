@@ -16,7 +16,7 @@ class Node {
     }
   }
 
-// var nodes = [];
+var nodes = [];
 
 // isso mudou, tenho que atualizar, pois aumentei o tamanho do canvas
 // localização x: 20 a 380, o 200 é o meio
@@ -38,9 +38,9 @@ window.onload = function(){
 // console.log(nodes)
 // TODO: Não toca nessa função, tá funcionando bem, o que tem que arrumar é o
 // resto!!!
-var nodes = [];
-var x = prompt("Type numbers of nodes");
 function numberOfNodes() {
+    var nodes = [];
+    var qtd =  getElementById("myNumber").value;
     class Node {
         constructor(label, pos, dir) {
             this.pos = pos;
@@ -49,7 +49,21 @@ function numberOfNodes() {
             this.ports = [null, null, null]; // [[node0, 0], [node1, 1], [node2, 2]]
         }
     }
-    for (var i = 0; i < x; i++) {
+
+    
+    for (var i= 1; i < qtd; i++){
+     container.appendChild(document.createTextNode("Member " + (i+1)));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "member" + i;
+                container.appendChild(input);
+                // Append a line break
+                container.appendChild(document.createElement("br"));
+            }
+
+
+    for (var i = 0; i < qtd; i++) {
         var tipo    = prompt("Type 0 to default")
         var local_x = prompt("Type location x")
         var local_y = prompt("Type location y")
