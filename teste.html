@@ -1,0 +1,63 @@
+<!Doctype HTML>
+<!-- this is a html page that takes a numeric value from a prompt and creates the same number of selection inputs from a list -->
+<html>
+  <head>
+    <title>Beta reduction</title>
+    <script>
+      class Node {
+        constructor(label, position, angle) {
+            this.id = null;
+            this.label = label; // 0: initial, 1: white node, 2: black node
+            this.position = position;
+            this.angle = angle; // angle for port 0
+            this.ports = [null, null, null]; // [[node0, 0], [node1, 1], [node2, 2]]
+            // Pivots starts in the same positon as the ports. Each index of the array represents a port. 
+            this.pivots = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+            this.radius = 20;
+        }
+        getPortPosition(slot) {
+            var add_angle = [0, getRadianFromAngle(240), getRadianFromAngle(120)][slot];
+            var position = add([this.position.x, this.position.y], rotate([this.radius, 0], this.angle + add_angle));
+            return {x: position[0], y: position[1]};
+        }
+    }
+
+
+      var nodes = [];
+    
+      //var choices = ["one", "two"];
+      var qtd = prompt("digite a quantidade de nós desejada")
+      for (var i = 0; i < qtd; i++) {
+            this["node" +i] = new Node("1", {x: "localx", y: "localy"}, "getRadianFromAngle(nodeAngle)")
+            nodes.push(this["node"+i])
+        //    console.log(nodes)
+        }
+
+      function addInput(divName) {
+
+        var newDiv = document.createElement('div');
+        var selectHTML = "";
+        selectHTML="<select>";
+        for(i = 0; i < nodes.length; i = i + 1) {
+          selectHTML += "<option value='" + nodes[i] + "'>" + nodes[i] + '</option>';
+          //nodes.push(i)
+          //console.log(choices)
+        }
+        selectHTML += "</select>" + '<input type="number" id="label" placeholder="Label" ></input> <input type="number" placeholder="Position X" id="positionx"></input> <input type="number" placeholder="Position Y" id="positiony"></input> <input type="number" placeholder="Angle" id="angle"></input>';
+        newDiv.innerHTML = selectHTML;
+        document.getElementById(divName).appendChild(newDiv);
+        console.log(nodes)
+      }
+    </script>
+  </head>
+  <body>
+    <form class="new" method="post" action="/jobs">
+      <div id="dynamicInput"></div>
+      <input type="button" value="Add" onclick="addInput('dynamicInput');" />
+      <input type="button" value="Save" />
+    </form>
+  </body>
+</html>
+
+
+

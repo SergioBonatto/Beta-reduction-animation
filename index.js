@@ -45,9 +45,10 @@ var nodes = makeNodes();
 var keyframes = []; // [[node0, node1, node2..], [node0, node1, node2...] ...]
 
 // -------- Editar aqui  ---------
+
 // Defines the properties of each node
 function makeNodes() {
-    // var nodes = [];
+    var nodes = [];
     window.onload  =function numberOfNodes() {
         var nodes = [];
         // var qtd =  getElementById("myNumber").value;
@@ -72,13 +73,7 @@ function makeNodes() {
        
         var initialNode = new Node(0, {x: width * 0.47 - 5, y: height * 0.05}, getRadianFromAngle()); 
         nodes.push(initialNode);
-        // var node0 = new Node(1, {x: width * 0.5, y: height * 0.2}, getRadianFromAngle(90));
-        // var node1 = new Node(1, {x: width * 0.3, y: height * 0.40}, getRadianFromAngle());
-        // var node2 = new Node(2, {x: width * 0.20, y: height * 0.60}, getRadianFromAngle());
-        // // -10 is to align an upside down node with the others
-        // var node3 = new Node(1, {x: width * 0.40, y: height * 0.60 - 10}, getRadianFromAngle(90));
-        // var node4 = new Node(1, {x: width - (width * 0.3), y: height * 0.40}, getRadianFromAngle());    
-        for (var i = 0; i < qtd; i++) {
+            for (var i = 0; i < qtd; i++) {
             var tipo    = prompt("Type label 1 or 2 (1: white, 2: black)") * 1 
             var local_x = prompt("Type location x (min: 20, max: 580)") * 1 
             var local_y = prompt("Type location y (min: 20, max: 580)") * 1 
@@ -88,50 +83,70 @@ function makeNodes() {
             console.log(nodes)
         }
     }
+   
     
+    var nodeSelect = new Array()
+    nodeSelect[node] = nodes
+    for(node in nodeSelect) {
+        option = new Option(nodeSelect[i], i);
+        nodeSelect.options[nodeSelect.options.length] = option;
+    }
+    // for(no in nodes) {
+//         option = new Option(nodes[no], language);
+//         languagesSelect.options[languagesSelect.options.length] = option;
+    // }
     for (var i = 0; i < nodes.length; i++) {
         nodes[i].id = nodeIdCounter++;
     }
-  
 
-    // GPT começou aqui
-    // take each node from the node list and ask which node each port will connect to, if the node is already connected select another node. Each port connects with only one node
-    for (var i = 0; i < nodes.length; i++) {
-           for (var j = 0; j < 3; j++) {
-            var nodeToConnect = nodes[i];
-            var slotToConnect = j;
-            if (nodes[i].ports[j] !== null) {
-                var nodeToConnect = nodes[i];
-                var slotToConnect = j;
-                // terminar aqui 
-                // pegar e transformar a variavel slotToConnect num prompt onde
-                // a pessoa digita qual porta conectar
-                // e nodeToConnect em qual nó conectar
-                // tenho que pegar e definir qual a porta do nó, então criar
-                // outro prompt pra receber a variavel
-            } else {
-                while (nodeToConnect === nodes[i]) {
-                    var nodeToConnect = getNodeToConnect(nodes, i, j);
-                    // entender como funciona essa parte
-                }
-            }
-            nodes[i].ports[j] = [nodeToConnect, slotToConnect];
-            // não posso esquecer de conectar as portas, deve ser aqui
-        }
-    }
-    return nodes;
-}
+// const languagesSelect = document.getElementById("languages-select");
+// const languagesList = ["Ruby", "JavaScript", "Python", "GoLang"];
+// for(no in nodes) {
+//   option = new Option(nodes[no], language);
+//   languagesSelect.options[languagesSelect.options.length] = option;
+// }
+    // languagesSelect.options.length = 0;
 
-// Gets a node to connect from the list of nodes
-function getNodeToConnect(nodes, nodeIndex, slot) {
-    var index = Math.floor(Math.random() * nodes.length);
-    var nodeToConnect = nodes[index];
-    var slotToConnect = Math.floor(Math.random() * 3);
-    if (nodeToConnect.ports[slotToConnect] !== null) {
-        nodeToConnect = getNodeToConnect(nodes, nodeIndex, slot);
-    }
-    return nodeToConnect;
+
 }
+//     // GPT começou aqui
+//     // take each node from the node list and ask which node each port will connect to, if the node is already connected select another node. Each port connects with only one node
+//     for (var i = 0; i < nodes.length; i++) {
+//            for (var j = 0; j < 3; j++) {
+//             var nodeToConnect = nodes[i];
+//             var slotToConnect = j;
+//             if (nodes[i].ports[j] !== null) {
+//                 var nodeToConnect = nodes[i];
+//                 var slotToConnect = j;
+//                 // terminar aqui
+//                 // pegar e transformar a variavel slotToConnect num prompt onde
+//                 // a pessoa digita qual porta conectar
+//                 // e nodeToConnect em qual nó conectar
+//                 // tenho que pegar e definir qual a porta do nó, então criar
+//                 // outro prompt pra receber a variavel
+//             } else {
+//                 while (nodeToConnect === nodes[i]) {
+//                     var nodeToConnect = getNodeToConnect(nodes, i, j);
+//                     // entender como funciona essa parte
+//                 }
+//             }
+//             nodes[i].ports[j] = [nodeToConnect, slotToConnect];
+//             // não posso esquecer de conectar as portas, deve ser aqui
+//         }
+//     }
+//     return nodes;
+// }
+// // isso aqui tbm é pra analisar
+// // Gets a node to connect from the list of nodes
+// function getNodeToConnect(nodes, nodeIndex, slot) {
+//     var index = Math.floor(Math.random() * nodes.length);
+//     var nodeToConnect = nodes[index];
+//     var slotToConnect = Math.floor(Math.random() * 3);
+//     if (nodeToConnect.ports[slotToConnect] !== null) {
+//         nodeToConnect = getNodeToConnect(nodes, nodeIndex, slot);
+//     }
+//     return nodeToConnect;
+// }
 
 // GPT terminou aqui
 
@@ -191,114 +206,114 @@ function setupCanvas(canvas) {
     return context;
   }
 
-window.onload = function() {
-    var canvas = document.getElementById("canvas");
-    var context = setupCanvas(canvas); 
-    
-    setInitialPositionForPivots(nodes);
-    // Calls a function or evaluates an expression at specified intervals
-    setInterval(() => {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        if (animate) {
-            var animNodes = setupKeyframeForAnimation();
-            for (var i = 0; i < animNodes.length; i++) {    
-                drawElements(context, animNodes[i]); 
-            };
-        } else {
-            for (var i = 0; i < nodes.length; i++) {    
-                drawElements(context, nodes[i]); 
-            };
-        }
-    }, 1000/30);
-    
-    // -- Rotation -- 
-    canvas.onclick = function(e) {
-        var positionClicked = [e.offsetX, e.offsetY];
-        var maxRadiusDistance = 10;
-        elementClicked = null;
-        for (var i = 0; i < nodes.length; i++) {    
-            // Checks if any node was clicked 
-            var distanceFromNode = getDistanceBetween([nodes[i].position.x, nodes[i].position.y], positionClicked);
-            if (distanceFromNode <= maxRadiusDistance) {
-                elementClicked = nodes[i];
-                prevPositionMovement.push(elementClicked.position);
-                // If clicking holding command
-                if (e.metaKey) {
-                    checkTransformation(elementClicked);     
-                } 
-            } 
-        }
-        
-    }
-    // -- Drag and drop actions --
-    canvas.onmousedown = function(e) {
-        var positionClicked = [e.offsetX, e.offsetY];
-        var maxRadiusDistance = 10;
-        elementSelected = null;
-        elementClicked = null;
-        // Check if the initial node was clicked
-        var distanceFromInitialNode = getDistanceBetween([nodes[0].position.x, nodes[0].position.y], positionClicked);
-        for (var i = 0; i < nodes.length; i++) {    
-            // Checks if any node was clicked 
-            var distanceFromNode = getDistanceBetween([nodes[i].position.x, nodes[i].position.y], positionClicked);
-            if (distanceFromNode <= maxRadiusDistance) {
-                elementSelected = ["node", nodes[i]];
-                prevPositionMovement.push(nodes[i].position);
-                updatePivotsPosition(nodes[i]);
-            }     
-            // Check if any pivot was clicked
-            for (var j = 0; j < 3; j++) {            
-                var distanceFromPivot = getDistanceBetween([nodes[i].pivots[j].x, nodes[i].pivots[j].y], positionClicked);
-                if (distanceFromPivot <= maxRadiusDistance) {
-                    elementSelected = ["pivot", nodes[i], j];
-                }
-            }  
-        }
-    };
-    canvas.onmousemove = function(e) {
-        if (elementSelected) {
-            var positionClicked = {x: e.offsetX, y: e.offsetY};
-            var node = elementSelected[1];
-            // Check the type of the element selected   
-            if (elementSelected[0] === "pivot") {
-                var pivotPort = elementSelected[2];
-                node.pivots[pivotPort] = positionClicked;
-            } else {
-                node.position = positionClicked
-                updatePivotsPosition(node);
-            }
-        }  
-    }
-    canvas.onmouseup = function(e) {
-        elementSelected = null;
-    }
-}
-
-function setupKeyframeForAnimation() {
-    var animKeyframe = (currentKeyframe + ((Date.now() - animate) / 1000)) % keyframes.length;
-    var nodesA = keyframes[Math.floor(animKeyframe)];
-    var nodesB = keyframes[Math.floor(animKeyframe + 1) % keyframes.length];
-    var animNodes = copyNodes(nodesA);
-    // There was no reduction or duplication
-    if (nodesA.length === nodesB.length) {
-        // updates position, angle and pivots of a node
-        for (var i = 0; i < animNodes.length; ++i) {
-            var t = animKeyframe % 1;
-            var {x: ax, y: ay} = nodesA[i].position;
-            var {x: bx, y: by} = nodesB[i].position;
-            var aa = nodesA[i].angle;
-            var ba = nodesB[i].angle;
-            animNodes[i].position = {x: ax+(bx-ax)*t, y: ay+(by-ay)*t};
-            animNodes[i].angle = aa + (ba - aa) * t;
-            for (var j = 0; j < 3; j++) {
-                var {x: pax, y: pay} = nodesA[i].pivots[j];
-                var {x: pbx, y: pby} = nodesB[i].pivots[j];
-                animNodes[i].pivots[j] = {x: pax+(pbx-pax)*t, y: pay+(pby-pay)*t};
-            }
-        }
-    }
-    return animNodes;
-}
+// window.onload = function() {
+//     var canvas = document.getElementById("canvas");
+//     var context = setupCanvas(canvas);
+//
+//     setInitialPositionForPivots(nodes);
+//     // Calls a function or evaluates an expression at specified intervals
+//     setInterval(() => {
+//         context.clearRect(0, 0, canvas.width, canvas.height);
+//         if (animate) {
+//             var animNodes = setupKeyframeForAnimation();
+//             for (var i = 0; i < animNodes.length; i++) {
+//                 drawElements(context, animNodes[i]);
+//             };
+//         } else {
+//             for (var i = 0; i < nodes.length; i++) {
+//                 drawElements(context, nodes[i]);
+//             };
+//         }
+//     }, 1000/30);
+//
+//     // -- Rotation --
+//     canvas.onclick = function(e) {
+//         var positionClicked = [e.offsetX, e.offsetY];
+//         var maxRadiusDistance = 10;
+//         elementClicked = null;
+//         for (var i = 0; i < nodes.length; i++) {
+//             // Checks if any node was clicked
+//             var distanceFromNode = getDistanceBetween([nodes[i].position.x, nodes[i].position.y], positionClicked);
+//             if (distanceFromNode <= maxRadiusDistance) {
+//                 elementClicked = nodes[i];
+//                 prevPositionMovement.push(elementClicked.position);
+//                 // If clicking holding command
+//                 if (e.metaKey) {
+//                     checkTransformation(elementClicked);
+//                 }
+//             }
+//         }
+//
+//     }
+//     // -- Drag and drop actions --
+//     canvas.onmousedown = function(e) {
+//         var positionClicked = [e.offsetX, e.offsetY];
+//         var maxRadiusDistance = 10;
+//         elementSelected = null;
+//         elementClicked = null;
+//         // Check if the initial node was clicked
+//         var distanceFromInitialNode = getDistanceBetween([nodes[0].position.x, nodes[0].position.y], positionClicked);
+//         for (var i = 0; i < nodes.length; i++) {
+//             // Checks if any node was clicked
+//             var distanceFromNode = getDistanceBetween([nodes[i].position.x, nodes[i].position.y], positionClicked);
+//             if (distanceFromNode <= maxRadiusDistance) {
+//                 elementSelected = ["node", nodes[i]];
+//                 prevPositionMovement.push(nodes[i].position);
+//                 updatePivotsPosition(nodes[i]);
+//             }
+//             // Check if any pivot was clicked
+//             for (var j = 0; j < 3; j++) {
+//                 var distanceFromPivot = getDistanceBetween([nodes[i].pivots[j].x, nodes[i].pivots[j].y], positionClicked);
+//                 if (distanceFromPivot <= maxRadiusDistance) {
+//                     elementSelected = ["pivot", nodes[i], j];
+//                 }
+//             }
+//         }
+//     };
+//     canvas.onmousemove = function(e) {
+//         if (elementSelected) {
+//             var positionClicked = {x: e.offsetX, y: e.offsetY};
+//             var node = elementSelected[1];
+//             // Check the type of the element selected
+//             if (elementSelected[0] === "pivot") {
+//                 var pivotPort = elementSelected[2];
+//                 node.pivots[pivotPort] = positionClicked;
+//             } else {
+//                 node.position = positionClicked
+//                 updatePivotsPosition(node);
+//             }
+//         }
+//     }
+//     canvas.onmouseup = function(e) {
+//         elementSelected = null;
+//     }
+// }
+//
+// function setupKeyframeForAnimation() {
+//     var animKeyframe = (currentKeyframe + ((Date.now() - animate) / 1000)) % keyframes.length;
+//     var nodesA = keyframes[Math.floor(animKeyframe)];
+//     var nodesB = keyframes[Math.floor(animKeyframe + 1) % keyframes.length];
+//     var animNodes = copyNodes(nodesA);
+//     // There was no reduction or duplication
+//     if (nodesA.length === nodesB.length) {
+//         // updates position, angle and pivots of a node
+//         for (var i = 0; i < animNodes.length; ++i) {
+//             var t = animKeyframe % 1;
+//             var {x: ax, y: ay} = nodesA[i].position;
+//             var {x: bx, y: by} = nodesB[i].position;
+//             var aa = nodesA[i].angle;
+//             var ba = nodesB[i].angle;
+//             animNodes[i].position = {x: ax+(bx-ax)*t, y: ay+(by-ay)*t};
+//             animNodes[i].angle = aa + (ba - aa) * t;
+//             for (var j = 0; j < 3; j++) {
+//                 var {x: pax, y: pay} = nodesA[i].pivots[j];
+//                 var {x: pbx, y: pby} = nodesB[i].pivots[j];
+//                 animNodes[i].pivots[j] = {x: pax+(pbx-pax)*t, y: pay+(pby-pay)*t};
+//             }
+//         }
+//     }
+//     return animNodes;
+// }
 
 // --- Keyboard actions --- 
 window.addEventListener("keydown", keysPressed, false);
