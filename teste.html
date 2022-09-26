@@ -4,6 +4,9 @@
   <head>
     <title>Beta reduction</title>
     <script>
+      // Size for canvas element
+      const height = 600;
+      const width = 600;
       class Node {
         constructor(label, position, angle) {
             this.id = null;
@@ -30,6 +33,7 @@
       for (var i = 0; i < qtd; i++) {
             this["node" +i] = new Node("1", {x: "localx", y: "localy"}, "getRadianFromAngle(nodeAngle)")
             nodes.push(this["node"+i])
+            nodes[i].id = i
         //    console.log(nodes)
         }
 
@@ -39,18 +43,22 @@
         var selectHTML = "";
         selectHTML="<select>";
         for(i = 0; i < nodes.length; i = i + 1) {
-          selectHTML += "<option value='" + nodes[i] + "'>" + nodes[i] + '</option>';
+          selectHTML += "<option value='" + nodes[i].id + "' id='" + nodes[i].id +"' > node" + nodes[i].id + '</option>';
           //nodes.push(i)
-          //console.log(choices)
+          //console.log(nodes[i])
         }
         selectHTML += "</select>" + '<input type="number" id="label" placeholder="Label" ></input> <input type="number" placeholder="Position X" id="positionx"></input> <input type="number" placeholder="Position Y" id="positiony"></input> <input type="number" placeholder="Angle" id="angle"></input>';
-        newDiv.innerHTML = selectHTML;
-        document.getElementById(divName).appendChild(newDiv);
-        console.log(nodes)
+          newDiv.innerHTML = selectHTML;
+          document.getElementById(divName).appendChild(newDiv);
+          console.log(nodes)
+
       }
     </script>
   </head>
   <body>
+    <canvas width="400px" height="400px" id="canvas" style="border: 1px solid black">
+        </canvas>
+
     <form class="new" method="post" action="/jobs">
       <div id="dynamicInput"></div>
       <input type="button" value="Add" onclick="addInput('dynamicInput');" />
