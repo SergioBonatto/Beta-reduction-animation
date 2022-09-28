@@ -41,13 +41,13 @@
 
         var newDiv = document.createElement('div');
         var selectHTML = "";
-        selectHTML="<select>";
+        selectHTML="<div>";
         for(i = 0; i < nodes.length; i = i + 1) {
-          selectHTML += "<option value='" + nodes[i].id + "' id='" + nodes[i].id +"' > node" + nodes[i].id + '</option>';
+          selectHTML += "<p> <option value='" + nodes[i].id + "' id='" + nodes[i].id +"' > node" + nodes[i].id + '</option>' + '<input type="number" id="label' + nodes[i].id + '" placeholder="Label" ></input> <input type="number" placeholder="Position X" id="positionX' + nodes[i].id + '"></input> <input type="number" placeholder="Position Y" id="positionY' + nodes[i].id + '"></input> <input type="number" placeholder="Angle" id="angle'+ nodes[i].id + '"></input></p> ';
           //nodes.push(i)
           //console.log(nodes[i])
         }
-        selectHTML += "</select>" + '<input type="number" id="label" placeholder="Label" ></input> <input type="number" placeholder="Position X" id="positionx"></input> <input type="number" placeholder="Position Y" id="positiony"></input> <input type="number" placeholder="Angle" id="angle"></input>';
+        selectHTML += "</div>" ;
           newDiv.innerHTML = selectHTML;
           document.getElementById(divName).appendChild(newDiv);
           console.log(nodes)
