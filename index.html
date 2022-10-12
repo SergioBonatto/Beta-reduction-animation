@@ -1,14 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
     <head>
-        <script src="index.js"></script>
+        <script src="index.js"></script> 
     </head>
-
     <body>
         <canvas width="400px" height="400px" id="canvas" style="border: 1px solid black">
         </canvas>
-        <select id="languages-select">
-            <option value="" disabled selected>Choose node </option>
-        </select>
+        <form class="new" method="post" action="/jobs">
+            <div id="dynamicInput"></div>
+            <input type="button" value="Add" onclick="addInput('dynamicInput');" />
+            <input type="button" value="Save" onclick="connection()" />
+        </form>
     </body>
 </html>
