@@ -68,9 +68,10 @@ var nodium = nodes.map(({id}) => id)
               selectHTML += 
                 '<div id="div-node-' + i +'">'+
                   '<p>' +
-                    '<select name="Nodes" id="node-select'  +i+ '">'+
-                      (nodium.map((num) => ('<option> Node ' + num + '</option>'))) +
-                    '</select>' +
+                    // '<select name="Nodes" id="node-select'  +i+ '">'+
+                      // (nodium.map((num) => ('<option id="node'+ num +'"> Node ' + num + '</option>'))) +
+                    // '</select>' +
+                    'Node' + nodes[i].id +
                     '<input type="number" placeholder="Label"       id="label-node-'      + i +                 '"  ></input>'  +
                     '<input type="number" placeholder="Position X"  id="positionX-node-'  + i +                 '"  ></input>'  +
                     '<input type="number" placeholder="Position Y"  id="positionY-node-'  + i +                 '"  ></input>'  +
@@ -102,9 +103,10 @@ var nodium = nodes.map(({id}) => id)
               selectHTML += 
                 '<div id="div-node-' + i +'">'+
                   '<p>' +
-                    '<select name="Nodes" id="node-select">'+
-                      (nodium.map((num) => ('<option> Node ' + num + '</option>'))) +
-                    '</select>' +
+                    // '<select name="Nodes" id="node-select">'+
+                      // (nodium.map((num) => ('<option> Node ' + num + '</option>'))) +
+                    // '</select>' +
+                    'Node' + i +
                     '<input type="number" placeholder="Label"       id="label-node-'      + i + '"                  ></input>' +
                     '<input type="number" placeholder="Position X"  id="positionX-node-'  + i + '"                  ></input>' +
                     '<input type="number" placeholder="Position Y"  id="positionY-node-'  + i + '"                  ></input>' +
@@ -158,38 +160,51 @@ function makeNodes() {
         }
     }
     for (i = 0; i< qtd; i++){
-        var id          = document.getElementById('node-select'+  i);
-        var tipo        = document.getElementById('label'      +  i);
-        var positionx   = document.getElementById('positionX'  +  i);
-        var positiony   = document.getElementById('positionY'  +  i);
-        var angle       = document.getElementById('angle'      +  i);
-               // var node[i].tipo = getElementById(nodes[i].id)
+        var id          = document.getElementById('node-select' + i);
+        var tipo        = document.getElementById('label'       + i);
+        var positionx   = document.getElementById('positionX'   + i);
+        var positiony   = document.getElementById('positionY'   + i);
+        var angle       = document.getElementById('angle'       + i);
+                      // var node[i].tipo = getElementById(nodes[i].id)
         this["node" +i] = new Node(tipo, {x: positionx, y: positiony}, getRadianFromAngle(angle))
         nodes.push(this["node"+i])
     }
-    
-    // for (i =0; i < qtd; i++){
-      // var conect
-    // }
+
+    for (i = 0; i < qtd; i++){
+      var estenode    = document.getElementById('node')
+      var porta       = document.getElementById('port-a-node' + i);
+      var portb       = document.getElementById('port-b-node' + i);
+      var portc       = document.getElementById('port-c-node' + i);
+      var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
+      var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
+      var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
+      var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
+      var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
+      var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
+      connectPorts([node , porta], [toNodea + portfroma], port0)
+      connectPorts([node , portb], [toNodeb + portfromb], port0)
+      connectPorts([node , portb], [toNodec + portfromc], port0)
+
+    }
     return nodes;
     console.log('makeNodes finalizou')
 }
 // Connections between ports
 //
 //
-function connection(){
-  for (i = 0; i < qtd; i++){
-    var nodePort0   = document.getElementById('node-'+i+'-port-0-to-node')
-    var port0       = document.getElementById('node-'+i+'-port-0-connection')
-    var nodePort1   = document.getElementById('node-'+i+'-port-1-to-node')
-    var port1       = document.getElementById('node-'+i+'-port-1-connection')
-    var nodePort2   = document.getElementById('node-'+i+'-port-2-to-node')
-    var port2       = document.getElementById('node-'+i+'-port-2-connection')
-    connectPorts(['node'+i, 0], ['node'+ nodePort0], port0)
-    connectPorts(['node'+i, 1], ['node'+ nodePort1], port1)
-    connectPorts(['node'+i, 2], ['node'+ nodePort2], port2)
-  }
-}
+// function connection(){
+//   for (i = 0; i < qtd; i++){
+//     var nodePort0   = document.getElementById('node-'+i+'-port-0-to-node')
+//     var port0       = document.getElementById('node-'+i+'-port-0-connection')
+//     var nodePort1   = document.getElementById('node-'+i+'-port-1-to-node')
+//     var port1       = document.getElementById('node-'+i+'-port-1-connection')
+//     var nodePort2   = document.getElementById('node-'+i+'-port-2-to-node')
+//     var port2       = document.getElementById('node-'+i+'-port-2-connection')
+//     connectPorts(['node'+i, 0], ['node'+ nodePort0], port0)
+//     connectPorts(['node'+i, 1], ['node'+ nodePort1], port1)
+//     connectPorts(['node'+i, 2], ['node'+ nodePort2], port2)
+//   }
+// }
   // connectPorts([node0, 0], [node1, 0]);
   // connectPorts([node0, 1], [node4, 0]);
   // connectPorts([node0, 2], [node5, 0]);
