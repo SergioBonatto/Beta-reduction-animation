@@ -55,7 +55,7 @@ var nodes = [];
             this["node" +i] = new Node("1", {x: "localx", y: "localy"}, "getRadianFromAngle(nodeAngle)")
             nodes.push(this["node"+i])
             nodes[i].id = i
-        //    console.log(nodes)
+           console.log(nodes)
         }
 var nodium = nodes.map(({id}) => id)
       console.log(nodium)
@@ -63,35 +63,70 @@ var nodium = nodes.map(({id}) => id)
         var newDiv = document.createElement('div');
         var selectHTML = "";
         selectHTML="<div>";
-         for(i = 0; i <= nodium.length; i++) {
-            selectHTML += 
-              "<div id='div-node-" + i +">"+
-                "<p>" +
-                  '<select name="Nodes" id="node-select">'+
-                    (nodium.map((num) => ('<option> Node ' + num + '</option>'))) +
-                  '</select>' +
-                  '<input type="number" placeholder="Label      "id="label-node-'     + i + '">  </input>' +
-                  '<input type="number" placeholder="Position X" id="positionX-node-' + i + '">  </input>' +
-                  '<input type="number" placeholder="Position Y" id="positionY-node-' + i + '">  </input>' +
-                  '<input type="number" placeholder="Angle"      id="angle-node-'     + i + '">  </input>' +
-                '</p>' +
-                '<p>Port 0 connects to node ' + i +
-                  '<input type="number" id="node-' + i +'-port-0-to-node" placeholder="Node" ></input>' +
-                  ' port ' +
-                  '<input type="number" id="node-' + i +'-port-0-connection" placeholder="Port 0">' +
-                '</p>'+
-                '<p>Port 1 connects to node ' + 
-                  '<input type="number" id="node-' + i +'-port-1-to-node" placeholder="Node"></input>' +
-                  ' port ' + 
-                  '<input type="number" id="node-' + i +'-port-1-connection" placeholder="Port 1">' +
-                '</p>' +
-                '<p>Port 2 connects to node '+
-                  '<input type="number" id="node-' + i +'-port-2-to-node" placeholder="Node"></input>' +
-                  ' port ' +
-                  '<input type="number" id="node-' + i +'-port-2-connection" placeholder="Port 2">' +   
-                '</p>' +
-              '</div>' ;
-          // console.log(nodes[i].id)
+         for(i = 0; i < nodes.length; i += 1) {
+           if (i < nodes.length -1){
+              selectHTML += 
+                '<div id="div-node-' + i +'">'+
+                  '<p>' +
+                    '<select name="Nodes" id="node-select'  +i+ '">'+
+                      (nodium.map((num) => ('<option> Node ' + num + '</option>'))) +
+                    '</select>' +
+                    '<input type="number" placeholder="Label"       id="label-node-'      + i +                 '"  ></input>'  +
+                    '<input type="number" placeholder="Position X"  id="positionX-node-'  + i +                 '"  ></input>'  +
+                    '<input type="number" placeholder="Position Y"  id="positionY-node-'  + i +                 '"  ></input>'  +
+                    '<input type="number" placeholder="Angle"       id="angle-node-'      + i +                 '"  ></input>'  +
+                  '</p>' +
+                  '<p>Port '+
+                    '<input type="number" placeholder="Port number" id="port-a-node'      + i +                 '"  ></input>'  +
+                      ' connects to node ' +
+                    '<input type="number" placeholder="Node"        id="node-'            + i + '-port-a-to-node"   ></input>'  +
+                    ' port ' +
+                    '<input type="number" placeHolder="Port 0"      id="node-'            + i + '-port-a-connection"></input>'  +
+                  '</p>'+
+                  '<p>Port '+
+                    '<input type="number" placeholder="Port number" id="port-b-node'      + i +                 '"  ></input>'  +
+                      ' connects to node ' +
+                    '<input type="number" placeholder="Node"        id="node-'            + i + '-port-b-to-node"   ></input>'  +
+                    ' port ' +
+                   '<input type="number" placeholder="Port 0"       id="node-'            + i + '-port-b-connection"></input>'  +
+                  '</p>'+
+                  '<p>Port '+
+                    '<input type="number" placeholder="Port number" id="port-c-node'      + i +                   '"></input>'  +
+                      ' connects to node ' +
+                    '<input type="number" placeholder="Node"        id="node-'            + i + '-port-c-to-node"   ></input>'  +
+                    ' port ' +
+                    '<input type="number" placeholder="Port 0"      id="node-'            + i + '-port-c-connection"></input>'  +
+                  '</p>'+
+                '</div>';
+           } else {
+              selectHTML += 
+                '<div id="div-node-' + i +'">'+
+                  '<p>' +
+                    '<select name="Nodes" id="node-select">'+
+                      (nodium.map((num) => ('<option> Node ' + num + '</option>'))) +
+                    '</select>' +
+                    '<input type="number" placeholder="Label"       id="label-node-'      + i + '"                  ></input>' +
+                    '<input type="number" placeholder="Position X"  id="positionX-node-'  + i + '"                  ></input>' +
+                    '<input type="number" placeholder="Position Y"  id="positionY-node-'  + i + '"                  ></input>' +
+                    '<input type="number" placeholder="Angle"       id="angle-node-'      + i + '"                  ></input>' +
+                  '</p>' +
+                  '<p>Port '+
+                    '<input type="number" placeholder="Port number" id="port-a-node'      + i + '"                  ></input>' +
+                      ' connects to node ' +
+                    '<input type="number" placeholder="Node"        id="node-'            + i + '-port-a-to-node"   ></input>' +
+                    ' port ' +
+                    '<input type="number" placeholder="Port 0"      id="node-'            + i + '-port-a-connection"></input>' +
+                  '</p>'+
+                  '<p>Port '+
+                    '<input type="number" placeholder="Port number" id="port-b-node'      + i + '"                  ></input>' +
+                      ' connects to node ' +
+                    '<input type="number" placeholder="Node"        id="node-'            + i + '-port-b-to-node"   ></input>' +
+                    ' port ' +
+                    '<input type="number" placeholder="Port 0"      id="node-'            + i + '-port-b-connection"></input>' +
+                  '</p>'+
+                '</div>';
+            }
+           console.log("no"+ i)
         }
         selectHTML += "</div>" ;
         newDiv.innerHTML = selectHTML;
@@ -123,11 +158,11 @@ function makeNodes() {
         }
     }
     for (i = 0; i< qtd; i++){
-        // var id          = i
-        var tipo        = document.getElementById('label'      + i );
-        var positionx   = document.getElementById('positionX'  + i);
-        var positiony   = document.getElementById('positionY'  + i);
-        var angle       = document.getElementById('angle'      + i);
+        var id          = document.getElementById('node-select'+  i);
+        var tipo        = document.getElementById('label'      +  i);
+        var positionx   = document.getElementById('positionX'  +  i);
+        var positiony   = document.getElementById('positionY'  +  i);
+        var angle       = document.getElementById('angle'      +  i);
                // var node[i].tipo = getElementById(nodes[i].id)
         this["node" +i] = new Node(tipo, {x: positionx, y: positiony}, getRadianFromAngle(angle))
         nodes.push(this["node"+i])
