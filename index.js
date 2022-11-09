@@ -192,20 +192,50 @@ function makeNodes() {
     }
 
     for (i = 0; i < qtd; i++){
-      var estenode    = document.getElementById('node')
-      var porta       = document.getElementById('port-a-node' + i);
-      var portb       = document.getElementById('port-b-node' + i);
-      var portc       = document.getElementById('port-c-node' + i);
-      var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
-      var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
-      var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
-      var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
-      var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
-      var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
-      connectPorts([node , porta], [toNodea + portfroma], port0)
-      connectPorts([node , portb], [toNodeb + portfromb], port0)
-      connectPorts([node , portb], [toNodec + portfromc], port0)
-
+      if (i < qtd - 2) {
+        var estenode    = document.getElementById('node')
+        var porta       = document.getElementById('port-a-node' + i);
+        var portb       = document.getElementById('port-b-node' + i);
+        var portc       = document.getElementById('port-c-node' + i);
+        var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
+        var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
+        var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
+        var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
+        var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
+        var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
+        connectPorts([estenode , porta], [toNodea + portfroma], port0)
+        connectPorts([estenode , portb], [toNodeb + portfromb], port0)
+        connectPorts([estenode , portb], [toNodec + portfromc], port0)       
+      } else if (i < qtd - 1 ){
+          var estenode    = document.getElementById('node')
+          var porta       = document.getElementById('port-a-node' + i);
+          var portb       = document.getElementById('port-b-node' + i);
+          // var portc       = document.getElementById('port-c-node' + i);
+          var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
+          var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
+          // var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
+          var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
+          var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
+          // var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
+          connectPorts([estenode , porta], [toNodea + portfroma], port0)
+          connectPorts([estenode , portb], [toNodeb + portfromb], port0)
+          // connectPorts([estenode , portb], [toNodec + portfromc], port0)
+      } else {
+          var estenode    = document.getElementById('node')
+          var porta       = document.getElementById('port-a-node' + i);
+          // var portb       = document.getElementById('port-b-node' + i);
+          // var portc       = document.getElementById('port-c-node' + i);
+          var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
+          // var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
+          // var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
+          var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
+          // var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
+          // var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
+          connectPorts([estenode , porta], [toNodea + portfroma], port0)
+          // connectPorts([estenode , portb], [toNodeb + portfromb], port0)
+          // connectPorts([estenode , portb], [toNodec + portfromc], port0)
+      }
+      
     }
     return nodes;
     console.log('makeNodes finalizou')
