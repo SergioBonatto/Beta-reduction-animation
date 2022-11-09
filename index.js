@@ -186,86 +186,45 @@ function makeNodes() {
         var positionx   = document.getElementById('positionX'   + i);
         var positiony   = document.getElementById('positionY'   + i);
         var angle       = document.getElementById('angle'       + i);
-                      // var node[i].tipo = getElementById(nodes[i].id)
         this["node" +i] = new Node(tipo, {x: positionx, y: positiony}, getRadianFromAngle(angle))
         nodes.push(this["node"+i])
     }
-
     for (i = 0; i < qtd; i++){
-      if (i < qtd - 2) {
-        var estenode    = document.getElementById('node')
+      if (i < qtd - 3) {
+        var estenode    = 'node' + document.getElementById('node')
         var porta       = document.getElementById('port-a-node' + i);
         var portb       = document.getElementById('port-b-node' + i);
         var portc       = document.getElementById('port-c-node' + i);
-        var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
-        var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
-        var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
+        var toNodea     = 'node' + document.getElementById('node-'       + i +'-port-a-to-node');
+        var toNodeb     = 'node' + document.getElementById('node-'       + i +'-port-b-to-node');
+        var toNodec     = 'node' + document.getElementById('node-'       + i +'-port-c-to-node');
         var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
         var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
         var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
-        connectPorts([estenode , porta], [toNodea + portfroma], port0)
-        connectPorts([estenode , portb], [toNodeb + portfromb], port0)
-        connectPorts([estenode , portb], [toNodec + portfromc], port0)       
+        connectPorts([estenode , porta], [toNodea , portfroma])
+        connectPorts([estenode , portb], [toNodeb , portfromb])
+        connectPorts([estenode , portb], [toNodec , portfromc])       
       } else if (i < qtd - 1 ){
-          var estenode    = document.getElementById('node')
+          var estenode    = 'node' + document.getElementById('node')
           var porta       = document.getElementById('port-a-node' + i);
           var portb       = document.getElementById('port-b-node' + i);
-          // var portc       = document.getElementById('port-c-node' + i);
-          var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
-          var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
-          // var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
+          var toNodea     = 'node' + document.getElementById('node-'       + i +'-port-a-to-node');
+          var toNodeb     = 'node' + document.getElementById('node-'       + i +'-port-b-to-node');
           var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
           var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
-          // var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
-          connectPorts([estenode , porta], [toNodea + portfroma], port0)
-          connectPorts([estenode , portb], [toNodeb + portfromb], port0)
-          // connectPorts([estenode , portb], [toNodec + portfromc], port0)
+          connectPorts([estenode , porta], [toNodea , portfroma])
+          connectPorts([estenode , portb], [toNodeb , portfromb])
       } else {
-          var estenode    = document.getElementById('node')
+          var estenode    = 'node' + document.getElementById('node')
           var porta       = document.getElementById('port-a-node' + i);
-          // var portb       = document.getElementById('port-b-node' + i);
-          // var portc       = document.getElementById('port-c-node' + i);
-          var toNodea     = document.getElementById('node-'       + i +'-port-a-to-node');
-          // var toNodeb     = document.getElementById('node-'       + i +'-port-b-to-node');
-          // var toNodec     = document.getElementById('node-'       + i +'-port-c-to-node');
+          var toNodea     = 'node' + document.getElementById('node-'       + i +'-port-a-to-node');
           var portfroma   = document.getElementById('node-'       + i +'-port-a-connection');
-          // var portfromb   = document.getElementById('node-'       + i +'-port-b-connection');
-          // var portfromc   = document.getElementById('node-'       + i +'-port-c-connection');
-          connectPorts([estenode , porta], [toNodea + portfroma], port0)
-          // connectPorts([estenode , portb], [toNodeb + portfromb], port0)
-          // connectPorts([estenode , portb], [toNodec + portfromc], port0)
+          connectPorts([estenode , porta], [toNodea , portfroma])
       }
-      
     }
     return nodes;
     console.log('makeNodes finalizou')
 }
-// Connections between ports
-//
-//
-// function connection(){
-//   for (i = 0; i < qtd; i++){
-//     var nodePort0   = document.getElementById('node-'+i+'-port-0-to-node')
-//     var port0       = document.getElementById('node-'+i+'-port-0-connection')
-//     var nodePort1   = document.getElementById('node-'+i+'-port-1-to-node')
-//     var port1       = document.getElementById('node-'+i+'-port-1-connection')
-//     var nodePort2   = document.getElementById('node-'+i+'-port-2-to-node')
-//     var port2       = document.getElementById('node-'+i+'-port-2-connection')
-//     connectPorts(['node'+i, 0], ['node'+ nodePort0], port0)
-//     connectPorts(['node'+i, 1], ['node'+ nodePort1], port1)
-//     connectPorts(['node'+i, 2], ['node'+ nodePort2], port2)
-//   }
-// }
-  // connectPorts([node0, 0], [node1, 0]);
-  // connectPorts([node0, 1], [node4, 0]);
-  // connectPorts([node0, 2], [node5, 0]);
-  // connectPorts([node5, 1], [node5, 2]);
-  // connectPorts([node1, 1], [node2, 0]);
-  // connectPorts([node1, 2], [node3, 2]);
-  // connectPorts([node2, 1], [node3, 0]);
-  // connectPorts([node2, 2], [node3, 1]);
-  // connectPorts([node4, 1], [node4, 2]);
-
 function setupCanvas(canvas) {
     var context = canvas.getContext("2d");
     if (window.devicePixelRatio > 1) {
@@ -638,100 +597,100 @@ function drawInitialNode(context, node) {
 }
 
 // Draw the shape of a triangle according to it's ports and it's connections
-// function drawElements(context, node) {
-//     context.strokeStyle = 'black';
-//     context.fillStyle = 'black';
-//
-//     if (node.label === 2) { // draws a black dot inside the triangle
-//         context.beginPath();
-//         context.arc(node.position.x, node.position.y, 3, 0, 2 * Math.PI);
-//         context.fill();
-//         context.stroke();
-//     }
-//
-//     if (elementSelected) {
-//         // Highlight the selected element
-//         if (elementSelected[1] === node &&
-//             (elementSelected[0] === "node" || elementSelected[0] === "initialNode")) {
-//             context.strokeStyle = selectionColor;
-//             context.fillStyle = selectionColor;
-//         }
-//     }
-//
-//     if (elementClicked) {
-//         if (elementClicked === node) {
-//             context.strokeStyle = selectionColor;
-//             context.fillStyle = selectionColor;
-//         }
-//     }
-//
-//     if (node.label === 0 || node.label === 5) {
-//         drawInitialNode(context, node);
-//     } else {
-//         // -- Triangles --
-//         context.beginPath();
-//         // Port 0 to 1
-//         context.moveTo(node.getPortPosition(0).x, node.getPortPosition(0).y);
-//         context.lineTo(node.getPortPosition(1).x, node.getPortPosition(1).y);
-//
-//         // Port 1 to 2
-//         context.moveTo(node.getPortPosition(1).x, node.getPortPosition(1).y);
-//         context.bezierCurveTo(node.getPortPosition(1).x, node.getPortPosition(1).y,
-//                                 node.position.x, node.position.y,
-//                                 node.getPortPosition(2).x, node.getPortPosition(2).y);
-//
-//         // Port 2 to 0
-//         context.moveTo(node.getPortPosition(2).x, node.getPortPosition(2).y);
-//         context.lineTo(node.getPortPosition(0).x, node.getPortPosition(0).y);
-//
-//         context.closePath();
-//         context.stroke();
-//     }
-//     // node.ports has the format of: [[node0, 0], [node1, 1], [node2, 2]]
-//     for (var i = 0; i < 3; i++) {
-//         var portPosition = node.getPortPosition(i);
-//         var portPivot = node.pivots[i];
-//
-//         var nodeToConnect = node.ports[i][0];
-//         var slotToConnect = node.ports[i][1];
-//         if (nodeToConnect.label !== 0 && nodeToConnect.label !== 5) {
-//             var portToConnectPosition = nodeToConnect.getPortPosition(slotToConnect);
-//             var portToConnectPivot = nodeToConnect.pivots[slotToConnect];
-//         } else {
-//             var portToConnectPivot = nodeToConnect.position;
-//             var portToConnectPosition = nodeToConnect.position;
-//         }
-//
-//         // -- Drawing pivots and lines --
-//         context.strokeStyle = 'black';
-//         context.fillStyle = 'black';
-//         if (node.label !== 0 && node.label !== 5) {
-//             // Create a line (curved, if it has a pivot) from the node beeing drawn and "nodeToConnect"
-//             context.beginPath();
-//             context.moveTo(portPosition.x, portPosition.y);
-//             context.bezierCurveTo(portPivot.x, portPivot.y,
-//                                 portToConnectPivot.x, portToConnectPivot.y,
-//                                 portToConnectPosition.x, portToConnectPosition.y);
-//             context.stroke();
-//         }
-//
-//         // Highlight the selected pivot
-//         if (elementSelected) {
-//             if (elementSelected[1] === node && elementSelected[2] === i) { // Pivot on a selected node
-//                 context.strokeStyle = selectionColor;
-//                 context.fillStyle = selectionColor;
-//             }
-//         }
-//         // Shows the position of the pivots
-//         if (!hidePivots) {
-//             if (node.label !== 0 && node.label !== 5) { // Initial node does not shows the pivots
-//                 context.beginPath();
-//                 context.arc(portPivot.x, portPivot.y, 3, 0, 2 * Math.PI);
-//                 context.fill();
-//                 context.stroke();
-//             }
-//         }
-//
-//     }
-// }
-//
+function drawElements(context, node) {
+    context.strokeStyle = 'black';
+    context.fillStyle = 'black';
+
+    if (node.label === 2) { // draws a black dot inside the triangle
+        context.beginPath();
+        context.arc(node.position.x, node.position.y, 3, 0, 2 * Math.PI);
+        context.fill();
+        context.stroke();
+    }
+
+    if (elementSelected) {
+        // Highlight the selected element
+        if (elementSelected[1] === node &&
+            (elementSelected[0] === "node" || elementSelected[0] === "initialNode")) {
+            context.strokeStyle = selectionColor;
+            context.fillStyle = selectionColor;
+        }
+    }
+
+    if (elementClicked) {
+        if (elementClicked === node) {
+            context.strokeStyle = selectionColor;
+            context.fillStyle = selectionColor;
+        }
+    }
+
+    if (node.label === 0 || node.label === 5) {
+        drawInitialNode(context, node);
+    } else {
+        // -- Triangles --
+        context.beginPath();
+        // Port 0 to 1
+        context.moveTo(node.getPortPosition(0).x, node.getPortPosition(0).y);
+        context.lineTo(node.getPortPosition(1).x, node.getPortPosition(1).y);
+
+        // Port 1 to 2
+        context.moveTo(node.getPortPosition(1).x, node.getPortPosition(1).y);
+        context.bezierCurveTo(node.getPortPosition(1).x, node.getPortPosition(1).y,
+                                node.position.x, node.position.y,
+                                node.getPortPosition(2).x, node.getPortPosition(2).y);
+
+        // Port 2 to 0
+        context.moveTo(node.getPortPosition(2).x, node.getPortPosition(2).y);
+        context.lineTo(node.getPortPosition(0).x, node.getPortPosition(0).y);
+
+        context.closePath();
+        context.stroke();
+    }
+    // node.ports has the format of: [[node0, 0], [node1, 1], [node2, 2]]
+    for (var i = 0; i < 3; i++) {
+        var portPosition = node.getPortPosition(i);
+        var portPivot = node.pivots[i];
+
+        var nodeToConnect = node.ports[i][0];
+        var slotToConnect = node.ports[i][1];
+        if (nodeToConnect.label !== 0 && nodeToConnect.label !== 5) {
+            var portToConnectPosition = nodeToConnect.getPortPosition(slotToConnect);
+            var portToConnectPivot = nodeToConnect.pivots[slotToConnect];
+        } else {
+            var portToConnectPivot = nodeToConnect.position;
+            var portToConnectPosition = nodeToConnect.position;
+        }
+
+        // -- Drawing pivots and lines --
+        context.strokeStyle = 'black';
+        context.fillStyle = 'black';
+        if (node.label !== 0 && node.label !== 5) {
+            // Create a line (curved, if it has a pivot) from the node beeing drawn and "nodeToConnect"
+            context.beginPath();
+            context.moveTo(portPosition.x, portPosition.y);
+            context.bezierCurveTo(portPivot.x, portPivot.y,
+                                portToConnectPivot.x, portToConnectPivot.y,
+                                portToConnectPosition.x, portToConnectPosition.y);
+            context.stroke();
+        }
+
+        // Highlight the selected pivot
+        if (elementSelected) {
+            if (elementSelected[1] === node && elementSelected[2] === i) { // Pivot on a selected node
+                context.strokeStyle = selectionColor;
+                context.fillStyle = selectionColor;
+            }
+        }
+        // Shows the position of the pivots
+        if (!hidePivots) {
+            if (node.label !== 0 && node.label !== 5) { // Initial node does not shows the pivots
+                context.beginPath();
+                context.arc(portPivot.x, portPivot.y, 3, 0, 2 * Math.PI);
+                context.fill();
+                context.stroke();
+            }
+        }
+
+    }
+}
+
