@@ -64,7 +64,7 @@ var nodium = nodes.map(({id}) => id)
         var selectHTML = "";
         selectHTML="<div>";
          for(i = 0; i < nodes.length; i += 1) {
-           if (i < nodes.length -1){
+           if (i < nodes.length -2){
               selectHTML += 
                 '<div id="div-node-' + i +'">'+
                   '<p>' +
@@ -99,8 +99,8 @@ var nodium = nodes.map(({id}) => id)
                     '<input type="number" placeholder="Port 0"      id="node-'            + i + '-port-c-connection"></input>'  +
                   '</p>'+
                 '</div>';
-           } else {
-              selectHTML += 
+           } else if (i < nodes.length - 1) {
+             selectHTML += 
                 '<div id="div-node-' + i +'">'+
                   '<p>' +
                     // '<select name="Nodes" id="node-select">'+
@@ -127,7 +127,28 @@ var nodium = nodes.map(({id}) => id)
                     '<input type="number" placeholder="Port 0"      id="node-'            + i + '-port-b-connection"></input>' +
                   '</p>'+
                 '</div>';
-            }
+           } else {
+             selectHTML += 
+                '<div id="div-node-' + i +'">'+
+                  '<p>' +
+                    // '<select name="Nodes" id="node-select">'+
+                      // (nodium.map((num) => ('<option> Node ' + num + '</option>'))) +
+                    // '</select>' +
+                    'Node' + i +
+                    '<input type="number" placeholder="Label"       id="label-node-'      + i + '"                  ></input>' +
+                    '<input type="number" placeholder="Position X"  id="positionX-node-'  + i + '"                  ></input>' +
+                    '<input type="number" placeholder="Position Y"  id="positionY-node-'  + i + '"                  ></input>' +
+                    '<input type="number" placeholder="Angle"       id="angle-node-'      + i + '"                  ></input>' +
+                  '</p>' +
+                  '<p>Port '+
+                    '<input type="number" placeholder="Port number" id="port-a-node'      + i + '"                  ></input>' +
+                      ' connects to node ' +
+                    '<input type="number" placeholder="Node"        id="node-'            + i + '-port-a-to-node"   ></input>' +
+                    ' port ' +
+                    '<input type="number" placeholder="Port 0"      id="node-'            + i + '-port-a-connection"></input>' +
+                  '</p>';
+           }
+           
            console.log("no"+ i)
         }
         selectHTML += "</div>" ;
