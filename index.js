@@ -41,7 +41,7 @@ var selectionColor  = 'green';
 var nodeIdCounter   = 0;
 
 // Nodes
-var nodes = makeNodes();
+// var nodes = makeNodes();
 
 // An Node array recording the changes of the positions 
 var keyframes = []; // [[node0, node1, node2..], [node0, node1, node2...] ...]
@@ -182,44 +182,48 @@ function makeNodes() {
     }
     for (i = 0; i< qtd; i++){
         // var id          = document.getElementById('node-select' + i);
-        var tipo        = document.getElementById('label'       + i);
-        var positionx   = document.getElementById('positionX'   + i);
-        var positiony   = document.getElementById('positionY'   + i);
-        var angle       = document.getElementById('angle'       + i);
+        var tipo        = document.getElementById('label-node-'       + i).value;
+        var positionx   = document.getElementById('positionX-node-'   + i).value;
+        var positiony   = document.getElementById('positionY-node-'   + i).value;
+        var angle       = document.getElementById('angle-node-'       + i).value;
         this["node" +i] = new Node(tipo, {x: positionx, y: positiony}, getRadianFromAngle(angle))
         nodes.push(this["node"+i])
     }
     for (i = 0; i < qtd; i++){
       if (i < qtd - 3) {
         var this_node     = 'node' + document.getElementById('node')
-        var port_a        = document.getElementById('port-a-node'   + i);
-        var port_b        = document.getElementById('port-b-node'   + i);
-        var port_c        = document.getElementById('port-c-node'   + i);
-        var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node');
-        var to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node');
-        var to_node_c     = 'node' + document.getElementById('node-'+ i +'-port-c-to-node');
-        var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection');
-        var port_from_b   = document.getElementById('node-'         + i +'-port-b-connection');
-        var port_from_c   = document.getElementById('node-'         + i +'-port-c-connection');
+        var port_a        = document.getElementById('port-a-node'   + i).value;
+        var port_b        = document.getElementById('port-b-node'   + i).value;
+        var port_c        = document.getElementById('port-c-node'   + i).value;
+        var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
+        var to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node').value;
+        var to_node_c     = 'node' + document.getElementById('node-'+ i +'-port-c-to-node').value;
+        var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection').value;
+        var port_from_b   = document.getElementById('node-'         + i +'-port-b-connection').value;
+        var port_from_c   = document.getElementById('node-'         + i +'-port-c-connection').value;
         connectPorts([this_node , port_a], [to_node_a , port_from_a])
         connectPorts([this_node , port_b], [to_node_b , port_from_b])
         connectPorts([this_node , port_b], [to_node_c , port_from_c])       
       } else if (i < qtd - 1 ){
           var this_node     = 'node' + document.getElementById('node')
-          var port_a        = document.getElementById('port-a-node'   + i);
-          var port_b        = document.getElementById('port-b-node'   + i);
-          var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node');
-          var to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node');
-          var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection');
-          var port_from_b   = document.getElementById('node-'         + i +'-port-b-connection');
+          var port_a        = document.getElementById('port-a-node'   + i).value;
+          var port_b        = document.getElementById('port-b-node'   + i).value;
+          var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
+          var to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node').value;
+          var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection').value;
+          var port_from_b   = document.getElementById('node-'         + i +'-port-b-connection').value;
+          console.log("pegou os elementos")
           connectPorts([this_node , port_a], [to_node_a , port_from_a])
+          console.log("conectou o node a")
           connectPorts([this_node , port_b], [to_node_b , port_from_b])
+          console.log('conectou o node b')
       } else {
           var this_node     = 'node' + document.getElementById('node')
-          var port_a        = document.getElementById('port-a-node'   + i);
-          var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node');
-          var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection');
+          var port_a        = document.getElementById('port-a-node'   + i).value;
+          var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
+          var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection').value;
           connectPorts([this_node , port_a], [to_node_a , port_from_a])
+          console.log('makeNodes finalizou 1')
       }
     }
     return nodes;
