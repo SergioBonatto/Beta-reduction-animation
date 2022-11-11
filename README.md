@@ -1,3 +1,5 @@
+fork from [Formality-Net-Animator](https://github.com/MaisaMilena/Formality-Net-Animator)
+
 # Nasic Render
 
 This tool is used to create an animation of the reduction process of interaction nets for [Nasic](https://github.com/MaiaVictor/Nasic) (N-Ary Symmetric Interaction Combinators).
