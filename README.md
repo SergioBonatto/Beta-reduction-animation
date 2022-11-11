@@ -44,18 +44,17 @@ This tool is used to create an animation of the reduction process of interaction
 
 <img src="nasic-render.gif" width="300" height="300" />
 
-# TODO0
+# TODO
 
 Corrigir bugs na linha `568`, não sei o que fazer, focarei em estudar mais pra ver se resolvo:
-````javascript 
+```javascript 
 function connectPorts([nodeA, slotA], [nodeB, slotB]) {
     nodeA.ports[slotA] = [nodeB, slotB];
     nodeB.ports[slotB] = [nodeA, slotA];
 }
-````
+```
 
 e `216`:
 ```javascript
-          connectPorts([this_node , port_a], [to_node_a , port_from_a])
-
-          ```
+connectPorts([this_node , port_a], [to_node_a , port_from_a])
+```
