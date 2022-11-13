@@ -11,8 +11,8 @@ class Node {
     }
 
     getPortPosition(slot) {
-        var add_angle = [0, getRadianFromAngle(240), getRadianFromAngle(120)][slot];
-        var position  = add([this.position.x, this.position.y], rotate([this.radius, 0], this.angle + add_angle));
+        let add_angle = [0, getRadianFromAngle(240), getRadianFromAngle(120)][slot];
+        let position  = add([this.position.x, this.position.y], rotate([this.radius, 0], this.angle + add_angle));
         return {x: position[0], y: position[1]};
     }
 
@@ -26,42 +26,42 @@ const width   = 500;
  * Type node: ["node", node]
  * Type pivot: ["pivot", node, port] 
  */
-var elementSelected = null; 
+let elementSelected = null; 
 // A node that will change it's angle. Type node: ["node", node]
-var elementClicked  = null;
+let elementClicked  = null;
 
 // -- Keys auxiliars --
-var animate     = null;
-var ctrlPressed = false;
-var hidePivots  = false;
+let animate     = null;
+let ctrlPressed = false;
+let hidePivots  = false;
 
-var prevPositionMovement = []; // [{x: 0, y: 0}] Adds all previous positions for elements moving. Does not identifies which objects move, only the position
+let prevPositionMovement = []; // [{x: 0, y: 0}] Adds all previous positions for elements moving. Does not identifies which objects move, only the position
 
-var selectionColor  = 'green';
-var nodeIdCounter   = 0;
+let selectionColor  = 'green';
+let nodeIdCounter   = 0;
 
 // Nodes
 // var nodes = makeNodes();
 
 // An Node array recording the changes of the positions 
-var keyframes = []; // [[node0, node1, node2..], [node0, node1, node2...] ...]
+let keyframes = []; // [[node0, node1, node2..], [node0, node1, node2...] ...]
 
 // -------- Edit this code to create your net  ---------
-var nodes = [];
+let nodes = [];
     
       //var choices = ["one", "two"];
-      var qtd = prompt("digite a quantidade de nós desejada")
-      for (var i = 0; i < qtd; i++) {
+      let qtd = prompt("digite a quantidade de nós desejada")
+      for (let i = 0; i < qtd; i++) {
             this["node" +i] = new Node("1", {x: "localx", y: "localy"}, "getRadianFromAngle(nodeAngle)")
             nodes.push(this["node"+i])
             nodes[i].id = i
            console.log(nodes)
         }
-var nodium = nodes.map(({id}) => id)
+let nodium = nodes.map(({id}) => id)
       console.log(nodium)
       function addInput(divName) {
-        var newDiv = document.createElement('div');
-        var selectHTML = "";
+        let newDiv = document.createElement('div');
+        let selectHTML = "";
         selectHTML="<div>";
          for(i = 0; i < nodes.length; i += 1) {
            if (i < nodes.length -2){
@@ -175,53 +175,53 @@ function makeNodes() {
             this.radius = 20;
         }
         getPortPosition(slot) {
-            var add_angle = [0, getRadianFromAngle(240), getRadianFromAngle(120)][slot];
-            var position  = add([this.position.x, this.position.y], rotate([this.radius, 0], this.angle + add_angle));
+            let add_angle = [0, getRadianFromAngle(240), getRadianFromAngle(120)][slot];
+            let position  = add([this.position.x, this.position.y], rotate([this.radius, 0], this.angle + add_angle));
             return {x: position[0], y: position[1]};
         }
     }
     for (i = 0; i< qtd; i++){
         // var id          = document.getElementById('node-select' + i);
-        var tipo        = document.getElementById('label-node-'       + i).value;
-        var positionx   = document.getElementById('positionX-node-'   + i).value;
-        var positiony   = document.getElementById('positionY-node-'   + i).value;
-        var angle       = document.getElementById('angle-node-'       + i).value;
+        let tipo        = Number(document.getElementById('label-node-'       + i)).value;
+        let positionx   = Number(document.getElementById('positionX-node-'   + i)).value;
+        let positiony   = Number(document.getElementById('positionY-node-'   + i)).value;
+        let angle       = Number(document.getElementById('angle-node-'       + i)).value;
         this["node" +i] = new Node(tipo, {x: positionx, y: positiony}, getRadianFromAngle(angle))
         nodes.push(this["node"+i])
     }
     for (i = 0; i < qtd; i++){
       if (i < qtd - 3) {
-        var this_node     = 'node' + document.getElementById('node')
-        var port_a        = document.getElementById('port-a-node'   + i).value;
-        var port_b        = document.getElementById('port-b-node'   + i).value;
-        var port_c        = document.getElementById('port-c-node'   + i).value;
-        var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
-        var to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node').value;
-        var to_node_c     = 'node' + document.getElementById('node-'+ i +'-port-c-to-node').value;
-        var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection').value;
-        var port_from_b   = document.getElementById('node-'         + i +'-port-b-connection').value;
-        var port_from_c   = document.getElementById('node-'         + i +'-port-c-connection').value;
+        let this_node     = 'node' + document.getElementById('node')
+        let port_a        = Number(document.getElementById('port-a-node'   + i)).value;
+        let port_b        = Number(document.getElementById('port-b-node'   + i)).value;
+        let port_c        = document.getElementById('port-c-node'   + i).value;
+        let to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
+        let to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node').value;
+        let to_node_c     = 'node' + document.getElementById('node-'+ i +'-port-c-to-node').value;
+        let port_from_a   = Number(document.getElementById('node-'         + i +'-port-a-connection')).value;
+        let port_from_b   = Number(document.getElementById('node-'         + i +'-port-b-connection')).value;
+        let port_from_c   = Number(document.getElementById('node-'         + i +'-port-c-connection')).value;
         connectPorts([this_node , port_a], [to_node_a , port_from_a])
         connectPorts([this_node , port_b], [to_node_b , port_from_b])
         connectPorts([this_node , port_b], [to_node_c , port_from_c])       
       } else if (i < qtd - 1 ){
-          var this_node     = 'node' + document.getElementById('node')
-          var port_a        = document.getElementById('port-a-node'   + i).value;
-          var port_b        = document.getElementById('port-b-node'   + i).value;
-          var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
-          var to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node').value;
-          var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection').value;
-          var port_from_b   = document.getElementById('node-'         + i +'-port-b-connection').value;
+          let this_node     = 'node' + document.getElementById('node')
+          let port_a        = Number(document.getElementById('port-a-node'   + i)).value;
+          let port_b        = Number(document.getElementById('port-b-node'   + i)).value;
+          let to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
+          let to_node_b     = 'node' + document.getElementById('node-'+ i +'-port-b-to-node').value;
+          let port_from_a   = Number(document.getElementById('node-'         + i +'-port-a-connection')).value;
+          let port_from_b   = Number(document.getElementById('node-'         + i +'-port-b-connection')).value;
           console.log("pegou os elementos")
           connectPorts([this_node , port_a], [to_node_a , port_from_a])
           console.log("conectou o node a")
           connectPorts([this_node , port_b], [to_node_b , port_from_b])
           console.log('conectou o node b')
       } else {
-          var this_node     = 'node' + document.getElementById('node')
-          var port_a        = document.getElementById('port-a-node'   + i).value;
-          var to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
-          var port_from_a   = document.getElementById('node-'         + i +'-port-a-connection').value;
+          let this_node     = 'node' + document.getElementById('node')
+          let port_a        = Number(document.getElementById('port-a-node'   + i)).value;
+          let to_node_a     = 'node' + document.getElementById('node-'+ i +'-port-a-to-node').value;
+          let port_from_a   = Number(document.getElementById('node-'         + i +'-port-a-connection')).value;
           connectPorts([this_node , port_a], [to_node_a , port_from_a])
           console.log('makeNodes finalizou 1')
       }
